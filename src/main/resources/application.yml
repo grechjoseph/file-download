@@ -3,9 +3,9 @@ server:
 spring:
   mvc:
     async:
-      request-timeout: 30000 # 30 seconds
+      request-timeout: 60000 # 60 seconds
 
 logging:
   level:
     com:
-      jg: INFO
+      jg: DEBUG
