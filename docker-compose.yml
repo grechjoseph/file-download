@@ -1,8 +1,27 @@
 version: "3"
 
+# The same Docker image is used, but two containers are deployed to demonstrate a multiple-microservice environment.
 services:
-  file-download:
+  file-api:
     image: test/file-download
+    hostname: file-api
+    network_mode: bridge
+    ports:
+      - 8081:8080
+      - 18081:18080
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 256M
+    environment:
+      APPLICATION_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:18080
+  facade-api:
+    image: test/file-download
+    hostname: facade-api
+    network_mode: bridge
+    links:
+      - file-api
     ports:
       - 8080:8080
       - 18080:18080
@@ -12,4 +31,5 @@ services:
           cpus: '1'
           memory: 256M
     environment:
+      FEIGN_FILEAPI_URL: http://file-api:8080
       APPLICATION_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:18080
