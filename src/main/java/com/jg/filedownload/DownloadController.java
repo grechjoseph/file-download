@@ -32,7 +32,7 @@ public class DownloadController {
      */
     @GetMapping(value = "/bridged/{fileName}")
     public ResponseEntity<StreamingResponseBody> getFileBridged(@PathVariable final String fileName) throws IOException {
-        log.debug("getFileBridged start.");
+        log.debug("Retrieving file [{}] from file-api.", fileName);
         final Response fileResponse = selfApiClient.getFile(fileName);
         final InputStream fileInputStream = fileResponse.body().asInputStream();
         return ResponseEntity.ok()
@@ -49,7 +49,7 @@ public class DownloadController {
      */
     @GetMapping(value = "/{fileName}")
     public ResponseEntity<StreamingResponseBody> getFile(@PathVariable final String fileName) throws IOException {
-        log.debug("getFile start.");
+        log.debug("Received request to download file [{}].", fileName);
         final File file = new File("files/" + fileName);
         final FileInputStream fileInputStream = new FileInputStream(file);
         return ResponseEntity.ok()
