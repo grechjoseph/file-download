@@ -5,8 +5,11 @@ services:
     image: test/file-download
     ports:
       - 8080:8080
+      - 18080:18080
     deploy:
       resources:
         limits:
           cpus: '1'
           memory: 256M
+    environment:
+      APPLICATION_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:18080
