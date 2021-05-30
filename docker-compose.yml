@@ -2,7 +2,7 @@ version: "3"
 
 services:
   file-download:
-    image: jgrech/file-download
+    image: test/file-download
     ports:
       - 8080:8080
     deploy:
