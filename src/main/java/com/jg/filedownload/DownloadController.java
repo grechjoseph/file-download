@@ -62,7 +62,14 @@ public class DownloadController {
     private StreamingResponseBody getStreamingResponseBody(final InputStream fileInputStream) {
         log.debug("Generating StreamingResponseBody for transferring InputStream to OutputStream.");
         return outputStream -> {
-            fileInputStream.transferTo(outputStream);
+            int nRead;
+            byte[] data = new byte[1024];
+
+            while ((nRead = fileInputStream.read(data, 0, data.length)) != -1) {
+                log.trace("getFileBridged write...");
+                outputStream.write(data, 0, nRead);
+            }
+
             fileInputStream.close();
         };
     }

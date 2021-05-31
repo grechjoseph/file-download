@@ -16,6 +16,8 @@ services:
           memory: 256M
     environment:
       APPLICATION_ARGS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:18080
+    volumes:
+      - ./files:/files
   facade-api:
     image: test/file-download
     hostname: facade-api
