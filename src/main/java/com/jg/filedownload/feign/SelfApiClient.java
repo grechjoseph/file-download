@@ -1,4 +1,4 @@
-package com.jg.filedownload;
+package com.jg.filedownload.feign;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 @FeignClient(name = "self-api-client", url = "${feign.file-api.url:http://localhost:8080}")
 public interface SelfApiClient {
 
-    @GetMapping(value = "/{fileName}")
+    @GetMapping(value = "/spring/{fileName}")
     feign.Response getFile(@PathVariable final String fileName);
+
+    @GetMapping(value = "/webflux/{fileName}")
+    feign.Response getFileUsingWebflux(@PathVariable final String fileName);
 
 }

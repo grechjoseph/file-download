@@ -6,5 +6,8 @@ Instead, the FileInputStream hooked to the resource is buffered-read into a Stre
 <b>Running</b>
 1. Add files under ./files directory.
 2. Run: <b>mvn clean install -DskipTests && docker build -t test/file-download . && docker-compose up</b>.
-3. Test the application by opening <b>localhost:8080/file-name.ext</b>.
-4. To test passing through Feign (ie: Frontend -> Backend -> Backend) to retrieve the file, open: <b>http://localhost:8080/bridges/file-name.ext</b>.
+3. Test the application by opening <b>localhost:8080/spring/file-name.ext</b>.
+4. To test passing through Feign (ie: Frontend -> Backend -> Backend) to retrieve the file, open: <b>http://localhost:8080/spring/bridged/file-name.ext</b>.
+
+<b>Running using WebFlux</b>
+1. Repeat the above, but replace /spring/ with /webflux/.
